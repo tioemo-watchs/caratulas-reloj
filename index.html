@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horologia - Galería de Carátulas de Reloj</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        horo: {
+                            bg: '#080b14',
+                            card: '#101524',
+                            cardHover: '#161c2e',
+                            gold: '#d4af37',
+                            goldLight: '#f3e5ab',
+                            goldDark: '#aa820a',
+                            roseGold: '#e8a87c',
+                            silver: '#e2e8f0',
+                            accent: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'guilloche': "radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.05) 0%, transparent 60%), repeating-radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 2px, transparent 3px, transparent 8px)",
+                        'metallic-gold': "linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%)",
+                        'metallic-dark': "linear-gradient(145deg, #181f32 0%, #0c101b 100%)"
+                    },
+                    boxShadow: {
+                        'gold-glow': '0 0 25px -5px rgba(212, 175, 55, 0.25)',
+                        'gold-sm': '0 0 10px rgba(212, 175, 55, 0.2)',
+                        'bezel': 'inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 10px 25px -5px rgba(0, 0, 0, 0.8)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for Horology Aesthetics */
+        body {
+            background-color: #080b14;
+            color: #e2e8f0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fcf6ba 0%, #d4af37 50%, #aa820a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-gradient {
+            border-image: linear-gradient(135deg, #d4af37, #4a3b10, #d4af37) 1;
+        }
+
+        /* Watch Bezel Simulation */
+        .watch-bezel {
+            position: relative;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(145deg, #2a3449, #0f1420);
+            box-shadow: inset 0 2px 3px rgba(255,255,255,0.2), inset 0 -2px 3px rgba(0,0,0,0.8), 0 8px 20px rgba(0,0,0,0.6);
+            transition: all 0.4s ease;
+        }
+
+        .watch-bezel::before {
+            content: '';
+            position: absolute;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
+            border-radius: 50%;
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+            pointer-events: none;
+        }
+
+        .watch-card:hover .watch-bezel {
+            transform: scale(1.03);
+            box-shadow: inset 0 2px 5px rgba(255,255,255,0.3), inset 0 -2px 5px rgba(0,0,0,0.9), 0 12px 28px rgba(212, 175, 55, 0.25);
+        }
+
+        /* Glass Reflection Effect */
+        .watch-glass {
+            position: relative;
+            overflow: hidden;
+            border-radius: 50%;
+        }
+
+        .watch-glass::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,0.03) 45%,
+                rgba(255,255,255,0.15) 50%,
+                rgba(255,255,255,0.03) 55%,
+                rgba(255,255,255,0) 100%
+            );
+            transform: rotate(30deg);
+            transition: transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .watch-card:hover .watch-glass::after {
+            transform: rotate(30deg) translate(20%, 20%);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #080b14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-horo-bg bg-guilloche flex flex-col justify-between">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="border-b border-slate-800/80 bg-horo-bg/90 backdrop-blur-md sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <!-- Brand & Logo -->
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-horo-gold via-yellow-600 to-amber-900 p-[1px] flex items-center justify-center shadow-gold-sm">
+                    <div class="w-full h-full bg-horo-bg rounded-full flex items-center justify-center">
+                        <i class="fa-solid fa-stopwatch text-horo-gold text-lg"></i>
+                    </div>
+                </div>
+                <div>
+                    <h1 class="font-serif text-2xl font-bold tracking-wider gold-gradient-text uppercase">CHRONO GALLERY</h1>
+                    <p class="text-xs text-slate-400 tracking-widest uppercase">Colección Alta Horología</p>
+                </div>
+            </div>
+
+            <!-- Actions Bar -->
+            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
+                <button id="reset-all-btn" class="px-3 py-2 text-xs font-medium text-slate-400 hover:text-rose-400 bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 rounded-lg transition-all flex items-center gap-1.5" title="Restaurar datos iniciales">
+                    <i class="fa-solid fa-rotate-left"></i>
+                    <span class="hidden md:inline">Restablecer</span>
+                </button>
+
+                <button id="global-edit-btn" class="px-4 py-2 text-xs font-semibold text-horo-bg bg-gradient-to-r from-horo-gold to-amber-500 hover:from-yellow-300 hover:to-amber-400 rounded-lg transition-all shadow-gold-sm flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                    <span id="global-edit-text">Modo Edición</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- HERO SECTION -->
+        <section class="text-center my-6 md:my-10 max-w-3xl mx-auto">
+            <div class="inline-flex items-center justify-center space-x-2 px-3 py-1 rounded-full border border-horo-gold/30 bg-horo-gold/5 text-horo-gold text-xs font-medium mb-4">
+                <i class="fa-solid fa-gem text-[10px]"></i>
+                <span class="tracking-widest uppercase">Galería de Esferas Personalizadas</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-100 tracking-tight mb-4">
+                Colección de <span class="gold-gradient-text">Carátulas de Reloj</span>
+            </h2>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
+                Explore nuestra selección exclusiva de diseños horológicos de precisión. Descargue carátulas exclusivas o gestione sus propios enlaces y diseños directamente en los 12 contenedores interactivos.
+            </p>
+        </section>
+
+        <!-- FILTERS AND SEARCH BAR -->
+        <section class="mb-8 flex flex-col md:flex-row items-center justify-between gap-4 bg-horo-card/80 p-4 rounded-xl border border-slate-800 backdrop-blur-sm">
+            <!-- Search -->
+            <div class="relative w-full md:w-80">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                <input type="text" id="search-input" placeholder="Buscar carátula por nombre..." class="w-full pl-9 pr-4 py-2 bg-slate-900/90 border border-slate-700/70 rounded-lg text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-horo-gold transition-colors">
+            </div>
+
+            <!-- Filter Categories -->
+            <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none">
+                <button class="filter-btn active px-3 py-1.5 rounded-lg text-xs font-medium bg-horo-gold text-horo-bg transition-all" data-category="all">Todos</button>
+                <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900 border border-slate-800 transition-all" data-category="Complicaciones">Complicaciones</button>
+                <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900 border border-slate-800 transition-all" data-category="Minimalista">Minimalista</button>
+                <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900 border border-slate-800 transition-all" data-category="Cronógrafo">Cronógrafo</button>
+                <button class="filter-btn px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-900 border border-slate-800 transition-all" data-category="Digital">Digital / Moderno</button>
+            </div>
+        </section>
+
+        <!-- 12 CARDS GRID -->
+        <section id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+            <!-- Cards generated dynamically via JavaScript -->
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800/80 bg-horo-bg py-6 mt-12 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-2">
+                <i class="fa-solid fa-crown text-horo-gold"></i>
+                <span class="font-serif font-bold text-slate-400">CHRONO GALLERY</span>
+                <span>&copy; 2026 Alta Horología</span>
+            </div>
+            <p class="text-slate-600">Diseñado para amantes de la micromecánica y el diseño de esferas de reloj.</p>
+        </div>
+    </footer>
+
+    <!-- EDIT MODAL FOR CARD -->
+    <div id="edit-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm hidden p-4">
+        <div class="bg-horo-card border border-horo-gold/30 rounded-2xl w-full max-w-lg overflow-hidden shadow-2xl transform transition-all">
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-900/50">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-horo-gold"></i>
+                    <h3 class="font-serif font-bold text-slate-200 text-lg">Editar Carátula #<span id="modal-card-id">1</span></h3>
+                </div>
+                <button id="close-modal-btn" class="text-slate-400 hover:text-slate-100 transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form -->
+            <form id="edit-card-form" class="p-6 space-y-4">
+                <input type="hidden" id="edit-index">
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Título de la Carátula</label>
+                    <input type="text" id="edit-title" required class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-horo-gold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Estilo / Categoría</label>
+                    <select id="edit-category" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-horo-gold">
+                        <option value="Complicaciones">Complicaciones</option>
+                        <option value="Minimalista">Minimalista</option>
+                        <option value="Cronógrafo">Cronógrafo</option>
+                        <option value="Digital">Digital / Moderno</option>
+                        <option value="Esqueleto">Esqueleto / Tourbillon</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Imagen de la Esfera</label>
+                    
+                    <!-- Option Tabs for Image -->
+                    <div class="flex gap-2 mb-2">
+                        <button type="button" id="tab-url-btn" class="px-3 py-1 text-xs rounded bg-horo-gold text-horo-bg font-medium">URL Web</button>
+                        <button type="button" id="tab-file-btn" class="px-3 py-1 text-xs rounded bg-slate-800 text-slate-300 font-medium">Subir Archivo</button>
+                    </div>
+
+                    <!-- URL Input Container -->
+                    <div id="url-input-container">
+                        <input type="url" id="edit-image-url" placeholder="https://ejemplo.com/reloj.jpg" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-horo-gold">
+                    </div>
+
+                    <!-- File Input Container -->
+                    <div id="file-input-container" class="hidden">
+                        <input type="file" id="edit-image-file" accept="image/*" class="w-full text-xs text-slate-400 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-slate-800 file:text-horo-gold hover:file:bg-slate-700 cursor-pointer">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Enlace de Descarga / Destino</label>
+                    <input type="url" id="edit-download-url" required placeholder="https://..." class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-horo-gold">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Descripción Breve</label>
+                    <textarea id="edit-description" rows="2" class="w-full px-3 py-2 bg-slate-900 border border-slate-700 rounded-lg text-sm text-slate-200 focus:outline-none focus:border-horo-gold resize-none"></textarea>
+                </div>
+
+                <!-- Preview Box -->
+                <div class="pt-2 border-t border-slate-800 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-full overflow-hidden border border-horo-gold/40 flex-shrink-0 bg-slate-900">
+                        <img id="edit-preview-img" src="" alt="Preview" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-xs text-slate-400">
+                        Previsualización en tiempo real de la carátula.
+                    </div>
+                </div>
+
+                <!-- Form Buttons -->
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" id="cancel-modal-btn" class="px-4 py-2 text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-800 rounded-lg transition-colors">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-4 py-2 text-xs font-semibold text-horo-bg bg-horo-gold hover:bg-yellow-400 rounded-lg transition-colors shadow-gold-sm">
+                        Guardar Cambios
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- PREVIEW/INSPECTION MODAL -->
+    <div id="preview-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md hidden p-4">
+        <div class="bg-horo-card border border-horo-gold/40 rounded-3xl w-full max-w-lg p-6 relative flex flex-col items-center text-center shadow-gold-glow">
+            <button id="close-preview-btn" class="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-xl">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Large Watch Simulation -->
+            <div class="w-64 h-64 sm:w-72 sm:h-72 rounded-full p-3 bg-gradient-to-br from-slate-700 via-slate-900 to-black shadow-2xl relative mb-6 border-2 border-horo-gold/40">
+                <div class="w-full h-full rounded-full overflow-hidden watch-glass border border-slate-700/80 bg-slate-950 flex items-center justify-center relative">
+                    <img id="preview-modal-img" src="" alt="Watch Face" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <span id="preview-modal-badge" class="px-3 py-1 rounded-full text-xs font-semibold bg-horo-gold/10 text-horo-gold border border-horo-gold/30 mb-2">Complicaciones</span>
+            <h3 id="preview-modal-title" class="font-serif text-2xl font-bold text-slate-100 mb-2">Nombre de Carátula</h3>
+            <p id="preview-modal-desc" class="text-slate-400 text-xs mb-6 max-w-sm">Descripción del reloj aquí...</p>
+
+            <a id="preview-modal-download" href="#" target="_blank" class="w-full py-3 px-6 rounded-xl font-semibold text-xs text-horo-bg bg-gradient-to-r from-horo-gold to-amber-500 hover:from-yellow-300 hover:to-amber-400 transition-all shadow-gold-sm flex items-center justify-center gap-2">
+                <i class="fa-solid fa-download text-sm"></i>
+                <span>Descargar Carátula</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 px-4 py-3 rounded-xl bg-slate-900 border border-horo-gold/40 text-slate-200 text-xs shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i id="toast-icon" class="fa-solid fa-circle-check text-horo-gold text-base"></i>
+        <span id="toast-message">Mensaje de notificación</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC persistent data and UI interactions -->
+    <script>
+        // Initial Default Data for 12 Watch Faces with SVG Data URLs / high quality watch face placeholders
+        const defaultWatchFaces = [
+            {
+                id: 1,
+                title: "BatMan",
+                category: "Comic",
+                description: "El reloj que usa el caballero oscuro.",
+                imageUrl: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://h5.timeshowcool.com/share/details/26155?watchtype=wear%20os"
+            },
+            {
+                id: 2,
+                title: "Grand Complication Lunar",
+                category: "Complicaciones",
+                description: "Fase lunar con indicador de calendario perpetuo y acentos estelares.",
+                imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/lunar-phase"
+            },
+            {
+                id: 3,
+                title: "Monaco Heritage Chrono",
+                category: "Cronógrafo",
+                description: "Doble sub-esfera para cronómetro con estilo de carreras clásico.",
+                imageUrl: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/heritage-chrono"
+            },
+            {
+                id: 4,
+                title: "Minimal Rose Gold",
+                category: "Minimalista",
+                description: "Diseño ultralimpio con manecillas delgadas y caja de oro rosa.",
+                imageUrl: "https://images.unsplash.com/photo-1524805444758-089113d48a6d?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/minimal-rose"
+            },
+            {
+                id: 5,
+                title: "Cyber Precision Digital",
+                category: "Digital",
+                description: "Pantalla OLED de alto contraste con métricas de salud y batería.",
+                imageUrl: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/cyber-precision"
+            },
+            {
+                id: 6,
+                title: "Nautilus Deep Blue",
+                category: "Complicaciones",
+                description: "Esfera con relieve azul marino y bisel octogonal pulido.",
+                imageUrl: "https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/nautilus-blue"
+            },
+            {
+                id: 7,
+                title: "Tourbillon Precision",
+                category: "Esqueleto",
+                description: "Jaula de Tourbillon giratoria a las 6 en punto con detalles dorados.",
+                imageUrl: "https://images.unsplash.com/photo-1547996160-81dfa63595aa?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/tourbillon"
+            },
+            {
+                id: 8,
+                title: "Speedmaster Professional",
+                category: "Cronógrafo",
+                description: "Escala taquimétrica y máxima legibilidad nocturna con Super-LumiNova.",
+                imageUrl: "https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/speedmaster"
+            },
+            {
+                id: 9,
+                title: "Bauhaus Pure White",
+                category: "Minimalista",
+                description: "Líneas geométricas puras inspiradas en la escuela de arquitectura germana.",
+                imageUrl: "https://images.unsplash.com/photo-1526045612212-70caf35c14df?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/bauhaus"
+            },
+            {
+                id: 10,
+                title: "Aero Flight Aviator",
+                category: "Complicaciones",
+                description: "Esfera de piloto con doble huso horario (GMT) e índices gigantes.",
+                imageUrl: "https://images.unsplash.com/photo-1533139502658-0198f920d8e8?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/aviator-gmt"
+            },
+            {
+                id: 11,
+                title: "Onyx Dark Stealth",
+                category: "Minimalista",
+                description: "Tono negro absoluto cepillado con marcadores en gris carbón.",
+                imageUrl: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/onyx-stealth"
+            },
+            {
+                id: 12,
+                title: "Titanium Sport Smart",
+                category: "Digital",
+                description: "Combina agujas analógicas virtuales con widgets digitales configurables.",
+                imageUrl: "https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=600&q=80",
+                downloadUrl: "https://example.com/download/titanium-smart"
+            }
+        ];
+
+        // State variables
+        let watchFaces = [];
+        let isGlobalEditMode = false;
+        let currentFilter = 'all';
+        let searchQuery = '';
+
+        // DOM Elements
+        const cardsGrid = document.getElementById('cards-grid');
+        const globalEditBtn = document.getElementById('global-edit-btn');
+        const globalEditText = document.getElementById('global-edit-text');
+        const resetAllBtn = document.getElementById('reset-all-btn');
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // Modal Elements
+        const editModal = document.getElementById('edit-modal');
+        const editCardForm = document.getElementById('edit-card-form');
+        const modalCardId = document.getElementById('modal-card-id');
+        const editIndexInput = document.getElementById('edit-index');
+        const editTitleInput = document.getElementById('edit-title');
+        const editCategoryInput = document.getElementById('edit-category');
+        const editImageUrlInput = document.getElementById('edit-image-url');
+        const editImageFileInput = document.getElementById('edit-image-file');
+        const editDownloadUrlInput = document.getElementById('edit-download-url');
+        const editDescriptionInput = document.getElementById('edit-description');
+        const editPreviewImg = document.getElementById('edit-preview-img');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const cancelModalBtn = document.getElementById('cancel-modal-btn');
+
+        const tabUrlBtn = document.getElementById('tab-url-btn');
+        const tabFileBtn = document.getElementById('tab-file-btn');
+        const urlInputContainer = document.getElementById('url-input-container');
+        const fileInputContainer = document.getElementById('file-input-container');
+
+        // Preview Modal Elements
+        const previewModal = document.getElementById('preview-modal');
+        const previewModalImg = document.getElementById('preview-modal-img');
+        const previewModalTitle = document.getElementById('preview-modal-title');
+        const previewModalBadge = document.getElementById('preview-modal-badge');
+        const previewModalDesc = document.getElementById('preview-modal-desc');
+        const previewModalDownload = document.getElementById('preview-modal-download');
+        const closePreviewBtn = document.getElementById('close-preview-btn');
+
+        // Initialize Application
+        function init() {
+            loadData();
+            renderCards();
+            setupEventListeners();
+        }
+
+        // Load data from LocalStorage or Fallback
+        function loadData() {
+            const savedData = localStorage.getItem('horo_watch_faces');
+            if (savedData) {
+                try {
+                    watchFaces = JSON.parse(savedData);
+                } catch (e) {
+                    watchFaces = [...defaultWatchFaces];
+                }
+            } else {
+                watchFaces = [...defaultWatchFaces];
+            }
+        }
+
+        // Save data to LocalStorage
+        function saveData() {
+            localStorage.setItem('horo_watch_faces', JSON.stringify(watchFaces));
+        }
+
+        // Toast Notification Function
+        function showToast(message, iconClass = 'fa-circle-check') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMsg.textContent = message;
+            toastIcon.className = `fa-solid ${iconClass} text-horo-gold text-base`;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Render the 12 Watch Face Cards
+        function renderCards() {
+            cardsGrid.innerHTML = '';
+
+            const filteredFaces = watchFaces.filter(item => {
+                const matchesCategory = (currentFilter === 'all') || (item.category === currentFilter);
+                const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                                      item.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredFaces.length === 0) {
+                cardsGrid.innerHTML = `
+                    <div class="col-span-full py-16 text-center text-slate-500 bg-horo-card/40 rounded-2xl border border-dashed border-slate-800">
+                        <i class="fa-solid fa-clock-rotate-left text-3xl text-slate-600 mb-3"></i>
+                        <p class="text-sm font-medium">No se encontraron carátulas que coincidan con la búsqueda.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredFaces.forEach((item, index) => {
+                const originalIndex = watchFaces.findIndex(f => f.id === item.id);
+                const card = document.createElement('div');
+                card.className = "watch-card group relative bg-gradient-to-b from-horo-card to-slate-950 rounded-2xl p-5 border border-slate-800 hover:border-horo-gold/40 transition-all duration-300 flex flex-col justify-between shadow-lg hover:shadow-gold-glow";
+
+                card.innerHTML = `
+                    <!-- Card Top Info -->
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-[10px] uppercase font-bold tracking-widest text-horo-gold/80 px-2 py-0.5 rounded border border-horo-gold/20 bg-horo-gold/5">
+                                ${item.category}
+                            </span>
+                            <div class="flex items-center gap-1">
+                                <button onclick="openPreviewModal(${originalIndex})" class="w-7 h-7 rounded-full bg-slate-900 border border-slate-700 hover:border-horo-gold text-slate-400 hover:text-horo-gold flex items-center justify-center transition-colors" title="Vista Previa">
+                                    <i class="fa-solid fa-eye text-xs"></i>
+                                </button>
+                                <button onclick="openEditModal(${originalIndex})" class="${isGlobalEditMode ? 'inline-flex' : 'hidden'} card-edit-btn w-7 h-7 rounded-full bg-horo-gold/10 border border-horo-gold/40 text-horo-gold hover:bg-horo-gold hover:text-horo-bg items-center justify-center transition-colors" title="Editar esta carátula">
+                                    <i class="fa-solid fa-pen text-xs"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Circular Watch Bezel & Image Container -->
+                        <div class="my-4 flex justify-center cursor-pointer" onclick="openPreviewModal(${originalIndex})">
+                            <div class="watch-bezel w-44 h-44 sm:w-48 sm:h-48">
+                                <div class="watch-glass w-full h-full bg-slate-950">
+                                    <img src="${item.imageUrl}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/400x400/101524/d4af37?text=Watch+Face'">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Watch Details -->
+                        <div class="text-center mt-2">
+                            <h3 class="font-serif font-bold text-slate-100 text-base group-hover:text-horo-gold transition-colors line-clamp-1">${item.title}</h3>
+                            <p class="text-slate-400 text-xs mt-1 line-clamp-2 min-h-[32px]">${item.description}</p>
+                        </div>
+                    </div>
+
+                    <!-- Card Action Button -->
+                    <div class="mt-5 pt-3 border-t border-slate-800/80 flex items-center gap-2">
+                        <a href="${item.downloadUrl}" target="_blank" rel="noopener noreferrer" class="flex-grow py-2 px-3 rounded-xl bg-slate-900 hover:bg-gradient-to-r hover:from-horo-gold hover:to-amber-500 text-slate-300 hover:text-horo-bg border border-slate-700/80 hover:border-transparent font-semibold text-xs transition-all duration-300 flex items-center justify-center gap-2 shadow-sm">
+                            <i class="fa-solid fa-arrow-down-to-line text-xs"></i>
+                            <span>Descargar Carátula</span>
+                        </a>
+                    </div>
+                `;
+
+                cardsGrid.appendChild(card);
+            });
+        }
+
+        // Toggle Global Edit Mode
+        function toggleGlobalEditMode() {
+            isGlobalEditMode = !isGlobalEditMode;
+            if (isGlobalEditMode) {
+                globalEditBtn.classList.remove('from-horo-gold', 'to-amber-500');
+                globalEditBtn.classList.add('from-emerald-500', 'to-teal-600');
+                globalEditText.textContent = "Modo Edición (Activo)";
+                showToast("Modo edición activado. Usa el icono del lápiz en cada carátula.", "fa-pen-to-square");
+            } else {
+                globalEditBtn.classList.add('from-horo-gold', 'to-amber-500');
+                globalEditBtn.classList.remove('from-emerald-500', 'to-teal-600');
+                globalEditText.textContent = "Modo Edición";
+                showToast("Modo edición desactivado.", "fa-check");
+            }
+            renderCards();
+        }
+
+        // Open Modal to Edit Specific Card
+        window.openEditModal = function(index) {
+            const item = watchFaces[index];
+            if (!item) return;
+
+            modalCardId.textContent = item.id;
+            editIndexInput.value = index;
+            editTitleInput.value = item.title;
+            editCategoryInput.value = item.category;
+            editImageUrlInput.value = item.imageUrl;
+            editDownloadUrlInput.value = item.downloadUrl;
+            editDescriptionInput.value = item.description;
+            editPreviewImg.src = item.imageUrl;
+
+            // Reset File input
+            editImageFileInput.value = '';
+
+            // Default Tab setup
+            switchTab('url');
+
+            editModal.classList.remove('hidden');
+        };
+
+        // Open Modal for Large Preview
+        window.openPreviewModal = function(index) {
+            const item = watchFaces[index];
+            if (!item) return;
+
+            previewModalImg.src = item.imageUrl;
+            previewModalTitle.textContent = item.title;
+            previewModalBadge.textContent = item.category;
+            previewModalDesc.textContent = item.description;
+            previewModalDownload.href = item.downloadUrl;
+
+            previewModal.classList.remove('hidden');
+        };
+
+        // Switch between URL and File upload tabs in edit modal
+        function switchTab(tab) {
+            if (tab === 'url') {
+                tabUrlBtn.className = "px-3 py-1 text-xs rounded bg-horo-gold text-horo-bg font-medium";
+                tabFileBtn.className = "px-3 py-1 text-xs rounded bg-slate-800 text-slate-300 font-medium";
+                urlInputContainer.classList.remove('hidden');
+                fileInputContainer.classList.add('hidden');
+            } else {
+                tabFileBtn.className = "px-3 py-1 text-xs rounded bg-horo-gold text-horo-bg font-medium";
+                tabUrlBtn.className = "px-3 py-1 text-xs rounded bg-slate-800 text-slate-300 font-medium";
+                fileInputContainer.classList.remove('hidden');
+                urlInputContainer.classList.add('hidden');
+            }
+        }
+
+        // Close Edit Modal
+        function closeEditModal() {
+            editModal.classList.add('hidden');
+        }
+
+        // Close Preview Modal
+        function closePreviewModal() {
+            previewModal.classList.add('hidden');
+        }
+
+        // Reset to default data
+        function resetToDefaults() {
+            if (confirm("¿Deseas restaurar las 12 carátulas predeterminadas? Se perderán los cambios guardados.")) {
+                watchFaces = JSON.parse(JSON.stringify(defaultWatchFaces));
+                saveData();
+                renderCards();
+                showToast("Se han restaurado las carátulas predeterminadas.", "fa-rotate-left");
+            }
+        }
+
+        // Setup All Event Listeners
+        function setupEventListeners() {
+            globalEditBtn.addEventListener('click', toggleGlobalEditMode);
+            resetAllBtn.addEventListener('click', resetToDefaults);
+
+            // Filter Buttons
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    filterBtns.forEach(b => {
+                        b.classList.remove('bg-horo-gold', 'text-horo-bg');
+                        b.classList.add('text-slate-400', 'bg-slate-900');
+                    });
+                    e.target.classList.add('bg-horo-gold', 'text-horo-bg');
+                    e.target.classList.remove('text-slate-400', 'bg-slate-900');
+
+                    currentFilter = e.target.dataset.category;
+                    renderCards();
+                });
+            });
+
+            // Search input
+            searchInput.addEventListener('input', (e) => {
+                searchQuery = e.target.value;
+                renderCards();
+            });
+
+            // Modal Controls
+            closeModalBtn.addEventListener('click', closeEditModal);
+            cancelModalBtn.addEventListener('click', closeEditModal);
+            closePreviewBtn.addEventListener('click', closePreviewModal);
+
+            // Close modals when clicking outside
+            editModal.addEventListener('click', (e) => {
+                if (e.target === editModal) closeEditModal();
+            });
+            previewModal.addEventListener('click', (e) => {
+                if (e.target === previewModal) closePreviewModal();
+            });
+
+            // Tab switching in modal
+            tabUrlBtn.addEventListener('click', () => switchTab('url'));
+            tabFileBtn.addEventListener('click', () => switchTab('file'));
+
+            // Live Image Preview URL Change
+            editImageUrlInput.addEventListener('input', (e) => {
+                if (e.target.value) {
+                    editPreviewImg.src = e.target.value;
+                }
+            });
+
+            // File input handle (convert to Base64 for LocalStorage)
+            editImageFileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        editPreviewImg.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Form Submit (Save changes)
+            editCardForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const index = parseInt(editIndexInput.value);
+
+                if (index >= 0 && index < watchFaces.length) {
+                    watchFaces[index].title = editTitleInput.value.trim();
+                    watchFaces[index].category = editCategoryInput.value;
+                    watchFaces[index].downloadUrl = editDownloadUrlInput.value.trim();
+                    watchFaces[index].description = editDescriptionInput.value.trim();
+
+                    // Check if file was selected or URL
+                    if (!fileInputContainer.classList.contains('hidden') && editImageFileInput.files[0]) {
+                        const file = editImageFileInput.files[0];
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            watchFaces[index].imageUrl = event.target.result;
+                            saveData();
+                            renderCards();
+                            closeEditModal();
+                            showToast("Carátula guardada correctamente con nueva imagen local.");
+                        };
+                        reader.readAsDataURL(file);
+                        return;
+                    } else {
+                        watchFaces[index].imageUrl = editImageUrlInput.value.trim() || editPreviewImg.src;
+                    }
+
+                    saveData();
+                    renderCards();
+                    closeEditModal();
+                    showToast("Carátula actualizada y guardada con éxito.");
+                }
+            });
+        }
+
+        // Start on page load
+        window.onload = init;
+    </script>
+</body>
+</html>
