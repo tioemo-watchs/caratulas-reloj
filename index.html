@@ -154,22 +154,11 @@
                     </div>
                 </div>
                 <div>
-                    <h1 class="font-serif text-2xl font-bold tracking-wider gold-gradient-text uppercase">CHRONO GALLERY</h1>
-                    <p class="text-xs text-slate-400 tracking-widest uppercase">Colección Alta Horología</p>
+                    <h1 class="font-serif text-2xl font-bold tracking-wider gold-gradient-text uppercase">Las carátulas del Tio Emo</h1>
+                    <p class="text-xs text-slate-400 tracking-widest uppercase">Considera invitarme a una cerveza /How about buying a beer?🍻</p>
+                    <button class="filter-btn active px-2 py-2 rounded-lg text-xs font-medium bg-horo-gold text-horo-bg transition-all" data-category="all">Dona</button> 
+					<link href="https://h5.timeshowcool.com/share/details/25860?watchtype=wear%20os"
                 </div>
-            </div>
-
-            <!-- Actions Bar -->
-            <div class="flex items-center gap-3 w-full sm:w-auto justify-end">
-                <button id="reset-all-btn" class="px-3 py-2 text-xs font-medium text-slate-400 hover:text-rose-400 bg-slate-900/60 hover:bg-slate-800 border border-slate-700/60 rounded-lg transition-all flex items-center gap-1.5" title="Restaurar datos iniciales">
-                    <i class="fa-solid fa-rotate-left"></i>
-                    <span class="hidden md:inline">Restablecer</span>
-                </button>
-
-                <button id="global-edit-btn" class="px-4 py-2 text-xs font-semibold text-horo-bg bg-gradient-to-r from-horo-gold to-amber-500 hover:from-yellow-300 hover:to-amber-400 rounded-lg transition-all shadow-gold-sm flex items-center gap-2">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                    <span id="global-edit-text">Modo Edición</span>
-                </button>
             </div>
         </div>
     </header>
@@ -184,10 +173,10 @@
                 <span class="tracking-widest uppercase">Galería de Esferas Personalizadas</span>
             </div>
             <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-100 tracking-tight mb-4">
-                Colección de <span class="gold-gradient-text">Carátulas de Reloj</span>
+                Las carátulas del <span class="gold-gradient-text">Tio Emo</span>
             </h2>
             <p class="text-slate-400 text-sm sm:text-base leading-relaxed">
-                Explore nuestra selección exclusiva de diseños horológicos de precisión. Descargue carátulas exclusivas o gestione sus propios enlaces y diseños directamente en los contenedores interactivos.
+                Carátulas GRATIS exclusivas para descargar de la plataforma TimeShow.
             </p>
         </section>
 
@@ -615,22 +604,6 @@
             });
         }
 
-        // Toggle Global Edit Mode
-        function toggleGlobalEditMode() {
-            isGlobalEditMode = !isGlobalEditMode;
-            if (isGlobalEditMode) {
-                globalEditBtn.classList.remove('from-horo-gold', 'to-amber-500');
-                globalEditBtn.classList.add('from-emerald-500', 'to-teal-600');
-                globalEditText.textContent = "Modo Edición (Activo)";
-                showToast("Modo edición activado. Usa el icono del lápiz en cada carátula.", "fa-pen-to-square");
-            } else {
-                globalEditBtn.classList.add('from-horo-gold', 'to-amber-500');
-                globalEditBtn.classList.remove('from-emerald-500', 'to-teal-600');
-                globalEditText.textContent = "Modo Edición";
-                showToast("Modo edición desactivado.", "fa-check");
-            }
-            renderCards();
-        }
 
         // Open Modal to Edit Specific Card
         window.openEditModal = function(index) {
